@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://1qx6sfcjg4do"]
+
+[ext_resource type="Script" path="res://dangerous_obstacle.cs" id="1_0b8mq"]
+[ext_resource type="Texture2D" uid="uid://dbbct8cexsxtc" path="res://pixel assets/Spikes/spike_ground spritesheet.png" id="8_e0b8r"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bmvch"]
+points = PackedVector2Array(-8, 1, -8, -4, -7, -4, -7, -3, -7, -2, -6, -2, -6, 0, -5, 0, -5, -8, -4, -8, -4, -5, -3, -5, -3, -2, -2, -2, -2, -4, -1, -4, -1, -10, 0, -10, 0, -5, 1, -5, 1, -2, 2, -2, 2, -10, 3, -10, 3, -5, 4, -5, 4, -1, 5, -1, 5, -7, 6, -7, 6, -3, 7, -3, 7, 1, 8, 1, 8, 2, 8, 3, -7, 3, -7, 2, -7, 1)
+
+[sub_resource type="Animation" id="Animation_csutq"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_knu8m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7btg2"]
+_data = {
+"Idle": SubResource("Animation_csutq"),
+"RESET": SubResource("Animation_knu8m")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyoyn"]
+size = Vector2(15, 4)
+
+[node name="dangerous_obstacle" type="Area2D"]
+script = ExtResource("1_0b8mq")
+
+[node name="Damage" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("ConvexPolygonShape2D_bmvch")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("8_e0b8r")
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7btg2")
+}
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.5, 6)
+shape = SubResource("RectangleShape2D_lyoyn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

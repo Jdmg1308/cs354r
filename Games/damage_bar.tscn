@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7dalipouaqxw"]
+
+[ext_resource type="PackedScene" uid="uid://cilg83k4hbxln" path="res://damage_block.tscn" id="1_q8r0v"]
+
+[node name="Damage_bar" type="Node2D"]
+
+[node name="damage_block" parent="." instance=ExtResource("1_q8r0v")]
+
+[node name="damage_block2" parent="." instance=ExtResource("1_q8r0v")]
+position = Vector2(19, 0)
+
+[node name="damage_block3" parent="." instance=ExtResource("1_q8r0v")]
+position = Vector2(38, 0)
+
+[node name="damage_block4" parent="." instance=ExtResource("1_q8r0v")]
+position = Vector2(57, 0)
+
+[node name="damage_block5" parent="." instance=ExtResource("1_q8r0v")]
+position = Vector2(76, 0)

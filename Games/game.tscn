@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7i2k3drf7dpe"]
+
+[ext_resource type="PackedScene" uid="uid://byirxgmatioo8" path="res://level_0.tscn" id="1_4w643"]
+[ext_resource type="Script" path="res://game_manager.cs" id="1_misbs"]
+[ext_resource type="PackedScene" uid="uid://bavg01lix8enx" path="res://UI/pause_menu.tscn" id="3_3icsh"]
+[ext_resource type="Script" path="res://HealthBar.cs" id="4_6xdkk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_372k7"]
+bg_color = Color(0.807843, 0.141176, 0.109804, 0.552941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycfum"]
+bg_color = Color(0, 0.933333, 0, 0.85098)
+
+[sub_resource type="Theme" id="Theme_n6gjp"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_372k7")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ycfum")
+
+[node name="Game" type="Node"]
+process_mode = 3
+script = ExtResource("1_misbs")
+
+[node name="Level_0" parent="." instance=ExtResource("1_4w643")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pause menu" parent="CanvasLayer" instance=ExtResource("3_3icsh")]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 567.0
+offset_right = -1106.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.57035
+scale = Vector2(20.9915, -3)
+theme = SubResource("Theme_n6gjp")
+step = 1.0
+value = 100.0
+show_percentage = false
+script = ExtResource("4_6xdkk")
